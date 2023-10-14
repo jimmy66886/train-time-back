@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${train.datasource.driver-class-name}
+      url: jdbc:mysql://${train.datasource.host}:${train.datasource.port}/${train.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${train.datasource.username}
+      password: ${train.datasource.password}
+  redis:
+    host: ${train.redis.host}
+    port: ${train.redis.port}
+    password: ${train.redis.password}
+    database: ${train.redis.database}
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zzmr.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      train:
+        mapper: debug
+        service: info
+        controller: info
+
+train:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    user-secret-key: zzmr123
+    # 设置jwt过期时间
+    user-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    user-token-name: token
