@@ -30,18 +30,28 @@ public class TrainVo implements Serializable {
 
     private String terminal;
 
+    // 始发时间
+    private LocalTime departureTime;
+
+    // 终点站到达时间
+    private LocalTime arrivalTime;
+
     // 出发站 -- 相当于用户输入的第一个车站
     private String startStation;
 
     // 到达站 -- 相当于用户输入的第二个车站
     private String arrivalStation;
 
-    // 发车时间
-    private LocalTime departureTime;
+    // 此车站开车时间
+    private LocalTime startTime;
 
-    // 到达时间
-    private LocalTime arrivalTime;
+    // 到达目标车站时间
+    private LocalTime endTime;
 
+    // 区间用时
+    private String tmpTime;
+
+    // 总用时
     private String costTime;
 
 }

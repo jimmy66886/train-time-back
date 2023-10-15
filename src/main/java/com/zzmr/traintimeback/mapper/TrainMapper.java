@@ -14,7 +14,7 @@ import java.util.List;
 public interface TrainMapper {
 
     @Select("select * from train;")
-    public List<Train> test();
+    public List<Train> getAllTrains();
 
     @Select("select * from train where train_number = #{trainNumber};")
     Train getByNumber(String trainNumber);
