@@ -111,6 +111,32 @@ public class TrainServiceImpl implements TrainService {
         return stationTrainVos;
     }
 
+    /**
+     * 获取所有的列车
+     *
+     * @return
+     */
+    @Override
+    public List<Train> getAllTrains() {
+        List<Train> allTrains = trainMapper.getAllTrains();
+        return allTrains;
+    }
+
+    @Override
+    public Train getTrainById(Long id) {
+        return trainMapper.getById(id);
+    }
+
+    /**
+     * 更新列车信息
+     *
+     * @param train
+     */
+    @Override
+    public void update(Train train) {
+        trainMapper.update(train);
+    }
+
     private static void comTime(Train train, int idxStart, int idxEnd, TrainVo trainVo) {
 
         String t1 = train.getRouteTimeE().split(",")[idxStart];

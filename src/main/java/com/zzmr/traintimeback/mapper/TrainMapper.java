@@ -1,8 +1,10 @@
 package com.zzmr.traintimeback.mapper;
 
 import com.zzmr.traintimeback.entity.Train;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -22,4 +24,11 @@ public interface TrainMapper {
     @Select("select * from train where train_number = #{trainNumber};")
     Train getByNumber(String trainNumber);
 
+    @Select("select * from train where id = #{id};")
+    Train getById(Long id);
+
+    @Update("update train set train_number = #{trainNumber},type=#{type},departure_station=#{departureStation}," +
+            "terminal=#{terminal},departure_time=#{departureTime},arrival_time=#{arrivalTime},cost_time=#{costTime}," +
+            "route_site=#{routeSite},route_time_a=#{routeTimeA},route_time_e=#{routeTimeE} where id = #{id}")
+    void update(Train train);
 }

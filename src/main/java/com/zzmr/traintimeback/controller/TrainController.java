@@ -20,7 +20,6 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@Log4j
 @Api(tags = "列车相关接口")
 @CrossOrigin
 @RequestMapping("/train")

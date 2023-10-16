@@ -27,4 +27,23 @@ public interface TrainService {
      * @return
      */
     List<StationTrainVo> getTrainsByStation(String station,String type);
+
+    /**
+     * 获取所有的列车
+     * @return
+     */
+    List<Train> getAllTrains();
+
+    /**
+     * 根据id获取列车信息
+     * @param id
+     * @return
+     */
+    Train getTrainById(Long id);
+
+    /**
+     * 更新列车信息
+     * @param train
+     */
+    void update(Train train);
 }
