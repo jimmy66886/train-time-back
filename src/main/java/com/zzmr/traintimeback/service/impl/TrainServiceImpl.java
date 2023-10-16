@@ -137,6 +137,18 @@ public class TrainServiceImpl implements TrainService {
         trainMapper.update(train);
     }
 
+    /**
+     * 车次模糊搜索
+     *
+     * @param trainNumber
+     * @return
+     */
+    @Override
+    public List<Train> getByNumberLike(String trainNumber) {
+        List<Train> trains = trainMapper.getByNumberLike(trainNumber);
+        return trains;
+    }
+
     private static void comTime(Train train, int idxStart, int idxEnd, TrainVo trainVo) {
 
         String t1 = train.getRouteTimeE().split(",")[idxStart];

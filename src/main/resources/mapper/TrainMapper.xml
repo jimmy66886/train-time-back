@@ -4,5 +4,9 @@
 <mapper namespace="com.zzmr.traintimeback.mapper.TrainMapper">
 
 
-
+    <select id="getByNumberLike" resultType="com.zzmr.traintimeback.entity.Train">
+        select *
+        from train
+        where train_number like concat('%',#{trainNumber},'%');
+    </select>
 </mapper>

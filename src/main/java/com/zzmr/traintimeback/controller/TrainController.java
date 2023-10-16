@@ -41,6 +41,13 @@ public class TrainController {
         return Result.success(train);
     }
 
+    @ApiOperation("根据车次模糊查询")
+    @GetMapping("/getByNumberLike/{trainNumber}")
+    public Result getTrainByNumberLike(@PathVariable String trainNumber) {
+        List<Train> trains = trainService.getByNumberLike(trainNumber);
+        return Result.success(trains);
+    }
+
     /**
      * 站站查询-通过query参数传递
      *
@@ -57,13 +64,14 @@ public class TrainController {
 
     /**
      * 根据车站名称查询经过该车站的列车
+     *
      * @param station
      * @return
      */
     @ApiOperation("站点查询")
     @GetMapping("/getByStation")
-    public Result getByStation(String station,String type) {
-        List<StationTrainVo> stationTrainVos = trainService.getTrainsByStation(station,type);
+    public Result getByStation(String station, String type) {
+        List<StationTrainVo> stationTrainVos = trainService.getTrainsByStation(station, type);
         return Result.success(stationTrainVos);
     }
 

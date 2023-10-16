@@ -46,4 +46,11 @@ public interface TrainService {
      * @param train
      */
     void update(Train train);
+
+    /**
+     * 根据车次模糊搜索
+     * @param trainNumber
+     * @return
+     */
+    List<Train> getByNumberLike(String trainNumber);
 }

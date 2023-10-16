@@ -31,4 +31,6 @@ public interface TrainMapper {
             "terminal=#{terminal},departure_time=#{departureTime},arrival_time=#{arrivalTime},cost_time=#{costTime}," +
             "route_site=#{routeSite},route_time_a=#{routeTimeA},route_time_e=#{routeTimeE} where id = #{id}")
     void update(Train train);
+
+    List<Train> getByNumberLike(String trainNumber);
 }
