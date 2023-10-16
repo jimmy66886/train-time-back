@@ -16,6 +16,10 @@ public interface TrainMapper {
     @Select("select * from train;")
     public List<Train> getAllTrains();
 
+    @Select("select * from train where type=#{type};")
+    public List<Train> getAllTrainsByType(String type);
+
     @Select("select * from train where train_number = #{trainNumber};")
     Train getByNumber(String trainNumber);
+
 }

@@ -3,6 +3,7 @@ package com.zzmr.traintimeback.controller;
 import com.zzmr.traintimeback.entity.Train;
 import com.zzmr.traintimeback.result.Result;
 import com.zzmr.traintimeback.service.TrainService;
+import com.zzmr.traintimeback.vo.StationTrainVo;
 import com.zzmr.traintimeback.vo.TrainVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,9 +51,21 @@ public class TrainController {
      */
     @ApiOperation("站站查询")
     @GetMapping("/getByStations")
-    public Result getTrainsByStations(String start, String end) {
-        List<TrainVo> trainVoList = trainService.getTrainsByStations(start, end);
+    public Result getTrainsByStations(String start, String end, String type) {
+        List<TrainVo> trainVoList = trainService.getTrainsByStations(start, end, type);
         return Result.success(trainVoList);
+    }
+
+    /**
+     * 根据车站名称查询经过该车站的列车
+     * @param station
+     * @return
+     */
+    @ApiOperation("站点查询")
+    @GetMapping("/getByStation")
+    public Result getByStation(String station,String type) {
+        List<StationTrainVo> stationTrainVos = trainService.getTrainsByStation(station,type);
+        return Result.success(stationTrainVos);
     }
 
 }
