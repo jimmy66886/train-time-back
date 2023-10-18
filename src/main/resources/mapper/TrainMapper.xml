@@ -2,6 +2,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zzmr.traintimeback.mapper.TrainMapper">
+    <insert id="insert">
+        insert into train(train_number, type, departure_station, terminal, departure_time, arrival_time, cost_time,
+                          route_site, route_time_a, route_time_e)
+        VALUES (#{trainNumber}, #{type}, #{departureStation}, #{terminal}, #{departureTime}, #{arrivalTime},
+            #{costTime}, #{routeSite}, #{routeTimeA}, #{routeTimeE})
+    </insert>
 
 
     <select id="getByNumberLike" resultType="com.zzmr.traintimeback.entity.Train">

@@ -1,10 +1,7 @@
 package com.zzmr.traintimeback.mapper;
 
 import com.zzmr.traintimeback.entity.Train;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -33,4 +30,9 @@ public interface TrainMapper {
     void update(Train train);
 
     List<Train> getByNumberLike(String trainNumber);
+
+    void insert(Train train);
+
+    @Delete("delete from train where id = #{id}")
+    void removeById(Long id);
 }

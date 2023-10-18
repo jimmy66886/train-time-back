@@ -3,6 +3,7 @@ package com.zzmr.traintimeback.controller;
 import com.zzmr.traintimeback.entity.Train;
 import com.zzmr.traintimeback.result.Result;
 import com.zzmr.traintimeback.service.TrainService;
+import com.zzmr.traintimeback.vo.NumberTrainVo;
 import com.zzmr.traintimeback.vo.StationTrainVo;
 import com.zzmr.traintimeback.vo.TrainVo;
 import io.swagger.annotations.Api;
@@ -37,7 +38,7 @@ public class TrainController {
     @ApiOperation("根据车次查询列车信息")
     @GetMapping("/getByNumber/{trainNumber}")
     public Result getTrainByNumber(@PathVariable String trainNumber) {
-        Train train = trainService.getByNumber(trainNumber);
+        NumberTrainVo train = trainService.getByNumber(trainNumber);
         return Result.success(train);
     }
 

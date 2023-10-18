@@ -1,6 +1,7 @@
 package com.zzmr.traintimeback.service;
 
 import com.zzmr.traintimeback.entity.Train;
+import com.zzmr.traintimeback.vo.NumberTrainVo;
 import com.zzmr.traintimeback.vo.StationTrainVo;
 import com.zzmr.traintimeback.vo.TrainVo;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @create 2023-10-14 19:39
  */
 public interface TrainService {
-    Train getByNumber(String trainNumber);
+    NumberTrainVo getByNumber(String trainNumber);
 
     /**
      * 查询存在此区间的所有列车
@@ -53,4 +54,16 @@ public interface TrainService {
      * @return
      */
     List<Train> getByNumberLike(String trainNumber);
+
+    /**
+     * 添加列车信息
+     * @param train
+     */
+    void add(Train train);
+
+    /**
+     * 根据id删除
+     * @param id
+     */
+    void deleteById(Long id);
 }

@@ -3,9 +3,11 @@ package com.zzmr.traintimeback.service.impl;
 import com.zzmr.traintimeback.entity.Train;
 import com.zzmr.traintimeback.mapper.TrainMapper;
 import com.zzmr.traintimeback.service.TrainService;
+import com.zzmr.traintimeback.vo.NumberTrainVo;
 import com.zzmr.traintimeback.vo.StationTrainVo;
 import com.zzmr.traintimeback.vo.TrainVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,9 +29,54 @@ public class TrainServiceImpl implements TrainService {
     private TrainMapper trainMapper;
 
     @Override
-    public Train getByNumber(String trainNumber) {
+    public NumberTrainVo getByNumber(String trainNumber) {
         Train train = trainMapper.getByNumber(trainNumber);
-        return train;
+        NumberTrainVo numberTrainVo = new NumberTrainVo();
+        BeanUtils.copyProperties(train, numberTrainVo);
+
+
+        // 封装dockingTime - 遍历整个 numberTrainVo的到达时间和发车时间
+        String routeTimeA = numberTrainVo.getRouteTimeA();
+        String routeTimeE = numberTrainVo.getRouteTimeE();
+
+        List<String> routeA = Arrays.asList(routeTimeA.split(","));
+        List<String> routeB = Arrays.asList(routeTimeE.split(","));
+
+        // dockingTime字段
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < routeA.size(); i++) {
+            String arrival = routeA.get(i);
+            String start = routeB.get(i);
+
+            if ("---".equals(arrival)) {
+                // 这个到达时间是---，说明这个就是始发站，那么停靠时间就是---
+                sb.append("---,");
+                continue;
+            }
+
+            // 最后一个不需要逗号
+            if ("---".equals(start)) {
+                sb.append("---");
+                continue;
+            }
+
+            // 不是---，说明不是始发站也不是终点站，正常计算时间
+            LocalTime arrivalTime = dateFormat(arrival);
+            LocalTime startTime = dateFormat(start);
+            // 停靠时间就等于发车时间-到达时间
+
+            // 得到两个时间的区间
+            Duration between = Duration.between(arrivalTime, startTime);
+            long minutes = between.toMinutes();
+            // 由于高铁的停靠时间不会超过1小时，所以这里直接将得到的分钟数据存入sb即可
+            sb.append(minutes + ",");
+
+        }
+
+        numberTrainVo.setDockingTimes(sb.toString());
+        System.out.println(numberTrainVo);
+        return numberTrainVo;
     }
 
     /**
@@ -147,6 +194,25 @@ public class TrainServiceImpl implements TrainService {
     public List<Train> getByNumberLike(String trainNumber) {
         List<Train> trains = trainMapper.getByNumberLike(trainNumber);
         return trains;
+    }
+
+    /**
+     * 添加列车信息
+     *
+     * @param train
+     */
+    @Override
+    public void add(Train train) {
+        trainMapper.insert(train);
+    }
+
+    /**
+     * 根据id删除
+     * @param id
+     */
+    @Override
+    public void deleteById(Long id) {
+        trainMapper.removeById(id);
     }
 
     private static void comTime(Train train, int idxStart, int idxEnd, TrainVo trainVo) {

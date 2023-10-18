@@ -1,0 +1,18 @@
+train:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: 1.14.102.11
+    port: 3306
+    database: train-time
+    username: root
+    password: "010203"
+
+  #  alioss:
+  #    endpoint: oss-cn-beijing.aliyuncs.com
+  #    bucket-name: zzmr-sky-take-out
+
+  redis:
+    host: 1.14.102.11
+    port: 6379
+    password: "010203"
+    database: 2

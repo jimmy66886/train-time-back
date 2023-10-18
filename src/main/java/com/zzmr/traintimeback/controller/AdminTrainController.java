@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -43,6 +44,13 @@ public class AdminTrainController {
         return Result.success();
     }
 
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("删除列车信息")
+    public Result deleteTrainById(@PathVariable Long id) {
+        trainService.deleteById(id);
+        return Result.success();
+    }
+
     @GetMapping("/getAllTrain")
     @ApiOperation("获取所有列车信息")
     public Result getAllTrain() {
@@ -63,5 +71,13 @@ public class AdminTrainController {
         trainService.update(train);
         return Result.success();
     }
+
+    @PostMapping("/add")
+    @ApiOperation("添加列车信息")
+    public Result add(@RequestBody Train train) {
+        trainService.add(train);
+        return Result.success();
+    }
+
 
 }

@@ -1,25 +1,22 @@
-package com.zzmr.traintimeback.entity;
+package com.zzmr.traintimeback.vo;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.zzmr.traintimeback.entity.Train;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
  * @author zzmr
- * @create 2023-10-14 19:25
+ * @create 2023-10-18 10:53
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class Train implements Serializable {
-
+public class NumberTrainVo {
     private Long id;
 
     private String trainNumber;
@@ -42,7 +39,9 @@ public class Train implements Serializable {
     // 到达时间字符串
     private String routeTimeA;
 
+    // 停靠时间
+    private String dockingTimes;
+
     // 发车时间字符串
     private String routeTimeE;
-
 }
